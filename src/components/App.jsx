@@ -38,6 +38,7 @@ export default class App extends Component {
         .catch(error => error.message)
         .finally(() => this.setState({ isLoading: false }));
     }
+    return;
   }
   componentWillUnmount() {
     window.removeEventListener('keydown', this.closeModalbyEsc);
@@ -72,7 +73,7 @@ export default class App extends Component {
     }
   };
   render() {
-    const { page, images, isOpen, isLoading } = this.state;
+    const { page, images, isOpen, isLoading, query } = this.state;
     return (
       <Container>
         <SearchBar onSubmit={this.setQuery} />
@@ -83,6 +84,7 @@ export default class App extends Component {
           <Modal
             largeImage={this.getLargeImg()}
             toggleModal={this.closeModal}
+            title={query}
           />
         )}
       </Container>

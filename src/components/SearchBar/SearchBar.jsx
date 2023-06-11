@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
   Search,
   SearchButton,
@@ -50,3 +51,6 @@ class SearchBar extends Component {
   }
 }
 export default SearchBar;
+SearchBar.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
