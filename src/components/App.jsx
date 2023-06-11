@@ -32,7 +32,7 @@ export default class App extends Component {
       await getImages(query, page)
         .then(response =>
           this.setState(prevState => ({
-            images: [...prevState.images, ...response],
+            images: [...prevState.images, ...response.hits],
           }))
         )
         .catch(error => error.message)
@@ -73,12 +73,12 @@ export default class App extends Component {
     }
   };
   render() {
-    const { page, images, isOpen, isLoading, query } = this.state;
+    const { images, isOpen, isLoading, query } = this.state;
     return (
       <Container>
         <SearchBar onSubmit={this.setQuery} />
         {images && <ImageGallery images={images} openModal={this.handleId} />}
-        {page && <Button onClick={this.fetchImages} />}
+        {images.length > 0 && <Button onClick={this.fetchImages} />}
         {isLoading && <Loader />}
         {isOpen && (
           <Modal

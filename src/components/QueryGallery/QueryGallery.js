@@ -10,6 +10,8 @@ export const getImages = async (query, page) => {
       }
       Response.reject('Incorect query');
     })
-    .then(query => query.hits);
+    .then(query => {
+      return query;
+    });
   return fetchImages;
 };
