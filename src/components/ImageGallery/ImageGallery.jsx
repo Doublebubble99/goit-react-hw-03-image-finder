@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import ImageGalleryItem from 'components/ImageGalleryItem/ImageGalleryItem';
 import { object } from 'prop-types';
 export default function ImageGallery({ images, openModal }) {
+  function openModal(evt) {
+    console.log(evt.target);
+  }
   return (
     <ImageList className="gallery" onClick={openModal}>
       {images.map((image, index) => (
