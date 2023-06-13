@@ -6,23 +6,19 @@ export default class Modal extends Component {
     isOpen: true,
   };
   componentDidMount() {
-    window.addEventListener('keydown', this.closeModalbyEsc);
+    document.addEventListener('keydown', this.closeModalbyEsc);
   }
   componentWillUnmount() {
-    window.removeEventListener('keydown', this.closeModalbyEsc);
+    document.removeEventListener('keydown', this.closeModalbyEsc);
   }
   closeModalbyEsc = evt => {
     if (evt.key === 'Escape') {
-      this.setState({
-        isOpen: false,
-      });
+      this.props.isClosed(false);
     }
   };
   closeModal = evt => {
     if (evt.currentTarget === evt.target) {
-      this.setState({
-        isOpen: false,
-      });
+      this.props.isClosed(false);
     }
   };
   render() {
@@ -38,5 +34,4 @@ export default class Modal extends Component {
 Modal.propTypes = {
   largeImage: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  toggleModal: PropTypes.func.isRequired,
 };

@@ -1,8 +1,17 @@
 import { GalleryItem, GalleryImage } from './ImageGalleryItem.styled';
 import PropTypes from 'prop-types';
-export default function ImageGalleryItem({ id, smallImage, openModal }) {
+export default function ImageGalleryItem({
+  id,
+  smallImage,
+  openModal,
+  largeImageURL,
+}) {
   return (
-    <GalleryItem className="gallery-item" id={id} onClick={openModal}>
+    <GalleryItem
+      className="gallery-item"
+      id={id}
+      onClick={() => openModal(largeImageURL)}
+    >
       <GalleryImage src={smallImage} alt={id} />
     </GalleryItem>
   );

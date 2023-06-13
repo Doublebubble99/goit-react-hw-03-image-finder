@@ -15,6 +15,7 @@ export default class App extends Component {
     query: '',
     isOpen: false,
     showBtn: '',
+    largeImage: '',
   };
 
   async componentDidUpdate(_, prevState) {
@@ -46,26 +47,21 @@ export default class App extends Component {
       page: prevState.page + 1,
     }));
   };
-  handleId = evt => {
-    // this.setState({ isOpen: true, key: Number(evt.target.alt) });
-    console.log(evt.id);
+  handleId = largeImageURL => {
+    this.setState({
+      isOpen: true,
+      largeImage: largeImageURL,
+    });
+    return largeImageURL;
   };
-  // getLargeImg = () => {
-  //   const { images, key } = this.state;
-  //   const largePicture = images
-  //     .map(({ largeImageURL }) => largeImageURL)
-  //     .find((image, index, pictures) => pictures.indexOf(image) === key);
-  //   return largePicture;
-  // };
-  closeModal = evt => {
-    if (evt.currentTarget === evt.target) {
-      this.setState({
-        isOpen: false,
-      });
-    }
+  closeModal = close => {
+    this.setState({
+      isOpen: close,
+    });
   };
   render() {
-    const { images, isOpen, isLoading, query, showBtn } = this.state;
+    const { images, isOpen, isLoading, query, showBtn, largeImage } =
+      this.state;
     return (
       <Container>
         <SearchBar onSubmit={this.setQuery} />
@@ -74,8 +70,8 @@ export default class App extends Component {
         {isLoading && <Loader />}
         {isOpen && (
           <Modal
-            largeImage={this.getLargeImg()}
-            toggleModal={this.closeModal}
+            largeImage={largeImage}
+            isClosed={this.closeModal}
             title={query}
           />
         )}
